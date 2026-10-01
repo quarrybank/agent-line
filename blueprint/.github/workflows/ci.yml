@@ -1,0 +1,31 @@
+# Example CI for a Node/TypeScript project. Replace the run commands with your own.
+# After the first green run, make these checks required on main
+# (Settings -> Branches -> Branch protection rule -> Require status checks).
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Type check
+        run: npm run typecheck
+      - name: Tests (includes crawler fixture and schema tests)
+        run: npm test

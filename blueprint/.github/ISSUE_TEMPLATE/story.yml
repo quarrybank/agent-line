@@ -1,0 +1,65 @@
+name: Story
+description: A piece of work a fresh Claude session can build from this issue alone.
+labels: ["ready"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If someone who's never seen the project couldn't build this from the issue alone, it isn't ready yet.
+  - type: textarea
+    id: story
+    attributes:
+      label: User story
+      description: "As a <who>, I want <what>, so that <why>. Then one plain-English line on the value."
+      placeholder: |
+        As a renter comparing co-living spaces, I want to see listings from Site X,
+        so that I don't have to check that site separately.
+        Value: adds ~200 listings in Lisbon.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: The problem or gap this closes. Link the bug, data or conversation that prompted it.
+    validations:
+      required: true
+  - type: textarea
+    id: build
+    attributes:
+      label: Build
+      description: What to build, in enough detail to start from this alone. Name the approach if one has been agreed.
+    validations:
+      required: true
+  - type: textarea
+    id: dod
+    attributes:
+      label: Definition of done
+      description: What must be true when this is finished. Name the test that proves it.
+      placeholder: |
+        - Parser test against 3 saved Site X pages passes
+        - Listings missing price or location are rejected and logged
+        - CI green
+    validations:
+      required: true
+  - type: textarea
+    id: verify
+    attributes:
+      label: Verify
+      description: How to check it works for real once deployed. A URL, a query, a command and what it should return.
+    validations:
+      required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: Files
+      description: The files or folders this will probably touch, one per line. Helps avoid two sessions editing the same thing.
+    validations:
+      required: false
+  - type: textarea
+    id: blockers
+    attributes:
+      label: Blockers and questions
+      description: "Anything that needs a human first (an API key, a decision). Write it as: blocked: need X to confirm Y."
+    validations:
+      required: false
